@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
 import { User, Users, Home, Settings, Plus } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
 
 const ERPDashboard = () => {
   const [activeMenu, setActiveMenu] = useState('Employees');
+  const navigate = useNavigate();
 
   const employees = [
     {
@@ -196,31 +198,34 @@ const ERPDashboard = () => {
             justifyContent: 'flex-end',
             marginBottom: '24px'
           }}>
-            <button style={{
-              backgroundColor: '#7c3aed',
-              color: '#ffffff',
-              border: 'none',
-              borderRadius: '8px',
-              padding: '12px 20px',
-              fontSize: '14px',
-              fontWeight: '600',
-              cursor: 'pointer',
-              display: 'flex',
-              alignItems: 'center',
-              gap: '8px',
-              transition: 'all 0.2s ease',
-              boxShadow: '0 2px 4px rgba(124, 58, 237, 0.2)'
-            }}
-            onMouseEnter={(e) => {
-              e.target.style.backgroundColor = '#6d28d9';
-              e.target.style.transform = 'translateY(-1px)';
-              e.target.style.boxShadow = '0 4px 8px rgba(124, 58, 237, 0.3)';
-            }}
-            onMouseLeave={(e) => {
-              e.target.style.backgroundColor = '#7c3aed';
-              e.target.style.transform = 'translateY(0)';
-              e.target.style.boxShadow = '0 2px 4px rgba(124, 58, 237, 0.2)';
-            }}>
+            <button 
+              onClick={() => navigate('/add-employee')}
+              style={{
+                backgroundColor: '#7c3aed',
+                color: '#ffffff',
+                border: 'none',
+                borderRadius: '8px',
+                padding: '12px 20px',
+                fontSize: '14px',
+                fontWeight: '600',
+                cursor: 'pointer',
+                display: 'flex',
+                alignItems: 'center',
+                gap: '8px',
+                transition: 'all 0.2s ease',
+                boxShadow: '0 2px 4px rgba(124, 58, 237, 0.2)'
+              }}
+              onMouseEnter={(e) => {
+                e.target.style.backgroundColor = '#6d28d9';
+                e.target.style.transform = 'translateY(-1px)';
+                e.target.style.boxShadow = '0 4px 8px rgba(124, 58, 237, 0.3)';
+              }}
+              onMouseLeave={(e) => {
+                e.target.style.backgroundColor = '#7c3aed';
+                e.target.style.transform = 'translateY(0)';
+                e.target.style.boxShadow = '0 2px 4px rgba(124, 58, 237, 0.2)';
+              }}
+            >
               <Plus size={16} />
               Add Employee
             </button>

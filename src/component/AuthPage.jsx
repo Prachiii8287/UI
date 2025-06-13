@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import Logo from './Logo.png';
+
 
 export default function AuthPage() {
   const navigate = useNavigate();
@@ -41,7 +43,7 @@ export default function AuthPage() {
   const styles = {
     container: {
       minHeight: '100vh',
-      background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+      background: 'linear-gradient(100deg, #4f46e5 0%, #7c3aed 50%, #06b6d4 100%)',
       display: 'flex',
       alignItems: 'center',
       justifyContent: 'center',
@@ -61,7 +63,7 @@ export default function AuthPage() {
     },
     leftSide: {
       flex: '1',
-      background: 'linear-gradient(135deg, #4f46e5 0%, #7c3aed 50%, #06b6d4 100%)',
+      background: '#7E44EE',
       position: 'relative',
       display: 'flex',
       alignItems: 'center',
@@ -87,6 +89,12 @@ export default function AuthPage() {
       borderRadius: '50%',
       animation: 'pulse 2s infinite'
     },
+      logoImage: {
+  width: '60px',
+  height: '60px',
+  objectFit: 'contain', // Maintains aspect ratio
+  borderRadius: '4px' // Optional: slight rounding
+},
     circle2: {
       position: 'absolute',
       inset: '16px',
@@ -351,6 +359,13 @@ export default function AuthPage() {
       }
     }
   `;
+  const LogoComponent = () => (
+  <img 
+    src={Logo} 
+    alt="Company Logo" 
+    style={styles.logoImage}
+  />
+);
 
   const UserIcon = () => (
     <svg style={styles.userIcon} fill="currentColor" viewBox="0 0 24 24">
@@ -403,7 +418,7 @@ export default function AuthPage() {
                 <div style={styles.circle3}></div>
                 <div style={styles.centerIcon}>
                   <div style={styles.iconBox}>
-                    <UserIcon />
+                     <LogoComponent />
                   </div>
                 </div>
               </div>

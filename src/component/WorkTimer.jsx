@@ -301,19 +301,19 @@ const styles = {
     cursor: 'pointer',
     position: 'absolute',
     left: 0,
-    color: '#7b2cbf',
+    color: '#7E44EE',
     transition: 'opacity 0.2s ease',
     '&:hover': {
       opacity: 0.8
     }
   },
   backIcon: {
-    color: '#7b2cbf'
+    color: '#7E44EE'
   },
   backText: {
     fontSize: '14px',
     fontWeight: '500',
-    color: '#7b2cbf'
+    color: '#7E44EE'
   },
   title: {
     fontSize: '24px',
@@ -365,14 +365,14 @@ const styles = {
   currentTimer: {
     fontSize: '16px',
     fontWeight: '600',
-    color: '#7c3aed',
+    color: '#7E44EE',
     backgroundColor: '#f3f4f6',
     padding: '8px 16px',
     borderRadius: '4px',
     border: '1px solid #e5e7eb',
   },
   startButton: {
-    backgroundColor: '#7c3aed',
+    backgroundColor: '#7E44EE',
     color: 'white',
     border: 'none',
     borderRadius: '6px',
@@ -419,11 +419,11 @@ const styles = {
   },
   exportButton: {
     padding: '8px 16px',
-    border: '1px solid #7c3aed',
+    border: '1px solid #7E44EE',
     borderRadius: '6px',
     fontSize: '14px',
     backgroundColor: 'white',
-    color: '#7c3aed',
+    color: '#7E44EE',
     cursor: 'pointer',
     fontWeight: '500',
   },
@@ -432,7 +432,7 @@ const styles = {
     border: 'none',
     borderRadius: '6px',
     fontSize: '14px',
-    backgroundColor: '#7c3aed',
+    backgroundColor: '#7E44EE',
     color: 'white',
     cursor: 'pointer',
     fontWeight: '500',

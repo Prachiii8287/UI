@@ -103,7 +103,7 @@ const ProjectDetailsPage = ({ project, onBack }) => {
         }
 
         .breadcrumb-current {
-          color: #7b2cbf;
+          color: #7E44EE;
           font-weight: 600;
         }
 
@@ -122,7 +122,7 @@ const ProjectDetailsPage = ({ project, onBack }) => {
           align-items: center;
           gap: 6px;
           padding: 8px 16px;
-          background-color: #7b2cbf;
+          background-color: #7E44EE;
           color: white;
           border: none;
           border-radius: 4px;
@@ -140,7 +140,7 @@ const ProjectDetailsPage = ({ project, onBack }) => {
         .project-title {
           font-size: 48px;
           font-weight: 700;
-          color: #7b2cbf;
+          color: #7E44EE;
           margin-bottom: 16px;
           line-height: 1.2;
         }
@@ -178,7 +178,7 @@ const ProjectDetailsPage = ({ project, onBack }) => {
         .info-label {
           font-size: 12px;
           font-weight: 700;
-          color: #7b2cbf;
+          color: #7E44EE;
           text-transform: uppercase;
           letter-spacing: 1px;
         }
@@ -213,7 +213,7 @@ const ProjectDetailsPage = ({ project, onBack }) => {
 
         .progress-bar {
           height: 100%;
-          background: linear-gradient(90deg, #7b2cbf 0%, #9c4dcc 100%);
+          background: linear-gradient(90deg, #7E44EE 0%, #9c4dcc 100%);
           border-radius: 8px;
           transition: width 0.4s ease;
         }
@@ -221,7 +221,7 @@ const ProjectDetailsPage = ({ project, onBack }) => {
         .progress-percentage {
           font-size: 14px;
           font-weight: 600;
-          color: #7b2cbf;
+          color: #7E44EE;
           text-align: left;
         }
 
@@ -254,9 +254,9 @@ const ProjectDetailsPage = ({ project, onBack }) => {
         }
 
         .tab-header.active {
-          color: #7b2cbf;
+          color: #7E44EE;
           background-color: #ffffff;
-          border-bottom-color: #7b2cbf;
+          border-bottom-color: #7E44EE;
         }
 
         .tab-content {
@@ -349,7 +349,7 @@ const ProjectDetailsPage = ({ project, onBack }) => {
           align-items: center;
           gap: 8px;
           padding: 12px 32px;
-          background-color: #7b2cbf;
+          background-color: #7E44EE;
           color: white;
           border: none;
           border-radius: 6px;
@@ -396,7 +396,7 @@ const ProjectDetailsPage = ({ project, onBack }) => {
 
           .tab-header.active {
             border-bottom: 1px solid #e0e0e0;
-            border-left: 3px solid #7b2cbf;
+            border-left: 3px solid #7E44EE;
           }
 
           .tasks-table {
@@ -523,9 +523,7 @@ const ProjectDetailsPage = ({ project, onBack }) => {
                     <tr key={index}>
                       <td>{task.taskName}</td>
                       <td>
-                        <span className={`status-badge ${getStatusClass(task.status)}`}>
-                          {task.status}
-                        </span>
+                        <span className={`status-${getStatusClass(task.status)}`}>{task.status}</span>
                       </td>
                       <td>{task.assignee}</td>
                       <td>{task.dueDate}</td>
@@ -533,12 +531,6 @@ const ProjectDetailsPage = ({ project, onBack }) => {
                   ))}
                 </tbody>
               </table>
-            )}
-            
-            {activeTab === 'resources' && (
-              <div className="resources-placeholder">
-                Resources section - Content coming soon
-              </div>
             )}
           </div>
         </div>

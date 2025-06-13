@@ -130,7 +130,7 @@ const ERPDashboard = () => {
                   borderRadius: '8px',
                   cursor: 'pointer',
                   backgroundColor: isActive ? '#f3f4f6' : 'transparent',
-                  color: isActive ? '#7c3aed' : '#6b7280',
+                  color: isActive ? '#7E44EE' : '#6b7280',
                   fontWeight: isActive ? '600' : '400',
                   transition: 'all 0.2s ease',
                   border: isActive ? '1px solid #e5e7eb' : '1px solid transparent'
@@ -192,7 +192,7 @@ const ERPDashboard = () => {
               width: '40px',
               height: '40px',
               borderRadius: '50%',
-              backgroundColor: '#7c3aed',
+              backgroundColor: '#7E44EE',
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
@@ -225,7 +225,7 @@ const ERPDashboard = () => {
                 <button 
                   onClick={handleAddEmployee}
                   style={{
-                    backgroundColor: '#7c3aed',
+                    backgroundColor: '#7E44EE',
                     color: '#ffffff',
                     border: 'none',
                     borderRadius: '8px',
@@ -245,7 +245,7 @@ const ERPDashboard = () => {
                     e.target.style.boxShadow = '0 4px 8px rgba(124, 58, 237, 0.3)';
                   }}
                   onMouseLeave={(e) => {
-                    e.target.style.backgroundColor = '#7c3aed';
+                    e.target.style.backgroundColor = '#7E44EE';
                     e.target.style.transform = 'translateY(0)';
                     e.target.style.boxShadow = '0 2px 4px rgba(124, 58, 237, 0.2)';
                   }}
@@ -303,7 +303,7 @@ const ERPDashboard = () => {
                           padding: '16px 20px',
                           fontSize: '14px',
                           fontWeight: '600',
-                          color: '#7c3aed'
+                          color: '#7E44EE'
                         }}>
                           {employee.id}
                         </td>

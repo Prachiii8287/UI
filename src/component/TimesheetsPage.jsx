@@ -59,7 +59,6 @@ const TimesheetsPage = () => {
     <div style={styles.container}>
       {/* Header Section */}
       <div style={styles.header}>
-        <h1 style={styles.title}>Timesheets</h1>
         <div style={styles.buttonGroup}>
           <button 
             onClick={() => setShowLogTimeSheet(true)}
@@ -86,13 +85,15 @@ const TimesheetsPage = () => {
       </div>
 
       {/* Stats Cards Section */}
-      <div style={styles.statsGrid}>
-        {statsData.map((stat, index) => (
-          <div key={index} style={styles.statCard}>
-            <h3 style={styles.statHeading}>{stat.heading}</h3>
-            <div style={styles.statCount}>{stat.count}</div>
-          </div>
-        ))}
+      <div style={styles.statsContainer}>
+        <div style={styles.statsGrid}>
+          {statsData.map((stat, index) => (
+            <div key={index} style={styles.statCard}>
+              <h3 style={styles.statHeading}>{stat.heading}</h3>
+              <div style={styles.statCount}>{stat.count}</div>
+            </div>
+          ))}
+        </div>
       </div>
 
       {/* Recent Activity Section */}
@@ -128,7 +129,7 @@ const styles = {
   },
   header: {
     display: 'flex',
-    justifyContent: 'space-between',
+    justifyContent: 'flex-end',
     alignItems: 'center',
     marginBottom: '32px'
   },
@@ -143,7 +144,7 @@ const styles = {
     alignItems: 'center'
   },
   addButton: {
-    backgroundColor: '#7b2cbf',
+    backgroundColor: '#7E44EE',
     color: 'white',
     border: 'none',
     padding: '10px 20px',
@@ -156,12 +157,14 @@ const styles = {
     alignItems: 'center',
     justifyContent: 'center',
     gap: '4px',
+    boxShadow: '0 4px 6px rgba(126, 68, 238, 0.2)',
     '&:hover': {
-      backgroundColor: '#6a1b9a'
+      backgroundColor: '#6a1b9a',
+      boxShadow: '0 6px 8px rgba(126, 68, 238, 0.3)'
     }
   },
   reviewButton: {
-    backgroundColor: '#7b2cbf',
+    backgroundColor: '#7E44EE',
     color: 'white',
     border: 'none',
     padding: '10px 20px',
@@ -174,12 +177,14 @@ const styles = {
     alignItems: 'center',
     justifyContent: 'center',
     gap: '4px',
+    boxShadow: '0 4px 6px rgba(126, 68, 238, 0.2)',
     '&:hover': {
-      backgroundColor: '#6a1b9a'
+      backgroundColor: '#6a1b9a',
+      boxShadow: '0 6px 8px rgba(126, 68, 238, 0.3)'
     }
   },
   workTimerButton: {
-    backgroundColor: '#7b2cbf',
+    backgroundColor: '#7E44EE',
     color: 'white',
     border: 'none',
     padding: '10px 20px',
@@ -192,19 +197,28 @@ const styles = {
     alignItems: 'center',
     justifyContent: 'center',
     gap: '4px',
+    boxShadow: '0 4px 6px rgba(126, 68, 238, 0.2)',
     '&:hover': {
-      backgroundColor: '#6a1b9a'
+      backgroundColor: '#6a1b9a',
+      boxShadow: '0 6px 8px rgba(126, 68, 238, 0.3)'
     }
+  },
+  statsContainer: {
+    backgroundColor: '#f5f5f5',
+    borderRadius: '12px',
+    padding: '24px',
+    marginBottom: '40px',
+    boxShadow: '0 2px 4px rgba(0, 0, 0, 0.05)',
+    border: '1px solid #e0e0e0'
   },
   statsGrid: {
     display: 'grid',
     gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))',
-    gap: '20px',
-    marginBottom: '40px'
+    gap: '20px'
   },
   statCard: {
-    backgroundColor: '#7b2cbf',
-    border: '2px solid #7b2cbf',
+    backgroundColor: '#7E44EE',
+    border: '2px solid #7E44EE',
     borderRadius: '12px',
     padding: '24px',
     textAlign: 'center',
@@ -266,7 +280,7 @@ const styles = {
   },
   activityHours: {
     fontWeight: '600',
-    color: '#7b2cbf'
+    color: '#7E44EE'
   },
   activityProject: {
     fontWeight: '600',
@@ -274,7 +288,8 @@ const styles = {
   },
   activityStatus: {
     fontSize: '13px',
-    fontWeight: '500'
+    fontWeight: '500',
+    color: '#7E44EE'
   }
 };
 

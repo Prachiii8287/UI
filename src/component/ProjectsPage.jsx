@@ -234,7 +234,7 @@ const ProjectsPage = () => {
 
         .page-header h1 {
           margin: 0;
-          color: #6b46c1;
+          color: #7E44EE;
           font-size: 28px;
           font-weight: 600;
         }
@@ -253,12 +253,12 @@ const ProjectsPage = () => {
         }
 
         .stat-card {
-          background-color: #6b46c1;
+          background-color: #7E44EE;
           padding: 20px;
           border-radius: 8px;
           box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
           text-align: center;
-          border-left: 4px solid #553c9a;
+          // border-left: 4px solid #553c9a;
         }
 
         .stat-card h3 {
@@ -287,7 +287,7 @@ const ProjectsPage = () => {
 
         .recent-updates h2 {
           margin: 0 0 24px 0;
-          color: #6b46c1;
+          color: #7E44EE;
           font-size: 20px;
           font-weight: 600;
         }
@@ -305,7 +305,7 @@ const ProjectsPage = () => {
           padding: 16px;
           background-color: #f8f9fa;
           border-radius: 6px;
-          border-left: 3px solid #6b46c1;
+          // border-left: 3px solid #6b46c1;
         }
 
         .update-icon {
@@ -341,7 +341,7 @@ const ProjectsPage = () => {
 
         .all-projects h2 {
           margin: 0 0 24px 0;
-          color: #6b46c1;
+          color: #7E44EE;
           font-size: 20px;
           font-weight: 600;
         }
@@ -377,7 +377,7 @@ const ProjectsPage = () => {
 
         .search-input:focus {
           outline: none;
-          border-color: #6b46c1;
+          border-color: #7E44EE;
         }
 
         .table-container {
@@ -395,7 +395,7 @@ const ProjectsPage = () => {
           padding: 16px 12px;
           text-align: left;
           font-weight: 600;
-          color: #6b46c1;
+          color: #7E44EE;
           border-bottom: 2px solid #e5e7eb;
           font-size: 14px;
         }
@@ -461,7 +461,7 @@ const ProjectsPage = () => {
 
         .progress-fill {
           height: 100%;
-          background-color: #6b46c1;
+          background-color: #7E44EE;
           transition: width 0.3s ease;
         }
 
@@ -497,7 +497,7 @@ const ProjectsPage = () => {
         }
 
         .view-button {
-          background-color: #6b46c1;
+          background-color: #7E44EE;
           color: white;
           border: none;
           padding: 8px 16px;

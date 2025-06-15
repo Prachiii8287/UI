@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { User, Users, Home, Settings, Plus, Clock, FolderOpen } from 'lucide-react';
+import React, { useState, useEffect } from 'react';
+import { User, Users, Home, Settings, Plus, Clock, FolderOpen, LogOut, ChevronLeft, Map } from 'lucide-react';
 import ProjectsPage from './ProjectsPage';
 import AddEmployeeForm from './AddEmployeeForm';
 import TimesheetsPage from './TimesheetsPage';
@@ -9,6 +9,8 @@ const ERPDashboard = () => {
   const [activeMenu, setActiveMenu] = useState('Employees');
   const [currentPage, setCurrentPage] = useState('Employees');
   const [showAddEmployee, setShowAddEmployee] = useState(false);
+  const [showProfileDropdown, setShowProfileDropdown] = useState(false);
+  const [collapsed, setCollapsed] = useState(false);
 
   const employees = [
     {
@@ -63,9 +65,9 @@ const ERPDashboard = () => {
 
   const menuItems = [
     { name: 'Home', icon: Home },
+    { name: 'Project', icon: FolderOpen },
     { name: 'Employees', icon: Users },
     { name: 'Timesheet', icon: Clock },
-    { name: 'Project', icon: FolderOpen },
     { name: 'Settings', icon: Settings },
   ];
 
@@ -79,6 +81,35 @@ const ERPDashboard = () => {
     setShowAddEmployee(true);
   };
 
+  const handleLogout = () => {
+    localStorage.removeItem('token');
+    window.location.href = '/';
+  };
+
+  // Handle clicks outside the sidebar
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      const sidebar = document.getElementById('sidebar');
+      const mainContent = document.getElementById('main-content');
+      
+      if (sidebar && mainContent) {
+        // If sidebar is expanded and click is outside sidebar, collapse it
+        if (!collapsed && !sidebar.contains(event.target) && mainContent.contains(event.target)) {
+          setCollapsed(true);
+        }
+        // If sidebar is collapsed and click is on the collapsed sidebar, expand it
+        else if (collapsed && sidebar.contains(event.target)) {
+          setCollapsed(false);
+        }
+      }
+    };
+
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, [collapsed]);
+
   return (
     <div style={{
       display: 'flex',
@@ -86,38 +117,43 @@ const ERPDashboard = () => {
       backgroundColor: '#f8f9fa'
     }}>
       {/* Sidebar */}
-      <div style={{
-        width: '260px',
-        backgroundColor: '#ffffff',
-        boxShadow: '2px 0 10px rgba(0, 0, 0, 0.1)',
-        display: 'flex',
-        flexDirection: 'column',
-        position: 'fixed',
-        height: '100vh',
-        zIndex: 1000
-      }}>
+      <div 
+        id="sidebar"
+        style={{
+          width: collapsed ? '80px' : '260px',
+          backgroundColor: '#ffffff',
+          boxShadow: '2px 0 10px rgba(0, 0, 0, 0.1)',
+          display: 'flex',
+          flexDirection: 'column',
+          position: 'fixed',
+          height: '100vh',
+          zIndex: 1000,
+          transition: 'width 0.3s ease',
+          cursor: collapsed ? 'pointer' : 'default'
+        }}
+      >
         {/* Logo */}
         <div style={{
-          padding: '24px 20px',
-          borderBottom: '1px solid #e9ecef',
-          textAlign: 'left'
+          padding: '30px',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          // borderBottom: '1px solid #e5e7eb'
         }}>
-          <img 
-            src={Logo} 
-            alt="Company Logo" 
-            style={{
-              maxWidth: '70%',
-              height: 'auto',
-              maxHeight: '40px'
-            }}
-          />
+          {!collapsed && (
+            <img src={Logo} alt="Logo" style={{ height: '40px'}} />
+          )}
         </div>
 
         {/* Menu Items */}
-        <nav style={{ padding: '20px 0', flex: 1 }}>
+        <div style={{
+          padding: '16px',
+          display: 'flex',
+          flexDirection: 'column',
+          gap: '8px'
+        }}>
           {menuItems.map((item) => {
-            const IconComponent = item.icon;
-            const isActive = activeMenu === item.name;
+            const Icon = item.icon;
             return (
               <div
                 key={item.name}
@@ -125,42 +161,40 @@ const ERPDashboard = () => {
                 style={{
                   display: 'flex',
                   alignItems: 'center',
-                  padding: '12px 20px',
-                  margin: '4px 12px',
+                  gap: '12px',
+                  padding: '12px',
                   borderRadius: '8px',
                   cursor: 'pointer',
-                  backgroundColor: isActive ? '#f3f4f6' : 'transparent',
-                  color: isActive ? '#7E44EE' : '#6b7280',
-                  fontWeight: isActive ? '600' : '400',
-                  transition: 'all 0.2s ease',
-                  border: isActive ? '1px solid #e5e7eb' : '1px solid transparent'
-                }}
-                onMouseEnter={(e) => {
-                  if (!isActive) {
-                    e.target.style.backgroundColor = '#f9fafb';
-                  }
-                }}
-                onMouseLeave={(e) => {
-                  if (!isActive) {
-                    e.target.style.backgroundColor = 'transparent';
-                  }
+                  backgroundColor: activeMenu === item.name ? '#f3f4f6' : 'transparent',
+                  color: activeMenu === item.name ? '#8b5cf6' : '#6b7280',
+                  transition: 'all 0.2s ease'
                 }}
               >
-                <IconComponent size={20} style={{ marginRight: '12px' }} />
-                {item.name}
+                <Icon size={20} />
+                {!collapsed && (
+                  <span style={{
+                    fontSize: '14px',
+                    fontWeight: '500'
+                  }}>
+                    {item.name}
+                  </span>
+                )}
               </div>
             );
           })}
-        </nav>
+        </div>
       </div>
 
       {/* Main Content */}
-      <div style={{
-        marginLeft: '260px',
-        flex: 1,
-        display: 'flex',
-        flexDirection: 'column'
-      }}>
+      <div 
+        id="main-content"
+        style={{
+          marginLeft: collapsed ? '80px' : '260px',
+          flex: 1,
+          padding: '24px',
+          transition: 'margin-left 0.3s ease'
+        }}
+      >
         {/* Header */}
         <div style={{
           backgroundColor: '#ffffff',
@@ -179,7 +213,7 @@ const ERPDashboard = () => {
             color: '#1f2937',
             margin: 0
           }}>
-            {showAddEmployee ? 'Add New Employee' : currentPage}
+            {showAddEmployee ? 'Add New Employee' : ''}
           </h1>
           
           <div style={{
@@ -188,17 +222,74 @@ const ERPDashboard = () => {
             gap: '16px'
           }}>
             {/* Profile Icon */}
-            <div style={{
-              width: '40px',
-              height: '40px',
-              borderRadius: '50%',
-              backgroundColor: '#7E44EE',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              cursor: 'pointer'
-            }}>
-              <User size={20} color="#ffffff" />
+            <div 
+              style={{
+                position: 'relative',
+                cursor: 'pointer'
+              }}
+              onClick={() => setShowProfileDropdown(!showProfileDropdown)}
+            >
+              <div style={{
+                width: '40px',
+                height: '40px',
+                borderRadius: '50%',
+                backgroundColor: '#8b5cf6',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                color: 'white',
+                fontSize: '16px',
+                fontWeight: '600'
+              }}>
+                A
+              </div>
+              
+              {/* Dropdown Menu */}
+              {showProfileDropdown && (
+                <div style={{
+                  position: 'absolute',
+                  top: '100%',
+                  right: 0,
+                  marginTop: '8px',
+                  backgroundColor: 'white',
+                  borderRadius: '8px',
+                  boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06)',
+                  minWidth: '200px',
+                  zIndex: 1000
+                }}>
+                  <div style={{
+                    padding: '8px 0'
+                  }}>
+                    <div style={{
+                      padding: '12px 16px',
+                      borderBottom: '1px solid #e5e7eb',
+                      color: '#374151',
+                      fontSize: '14px',
+                      fontWeight: '500'
+                    }}>
+                      Admin User
+                    </div>
+                    <div 
+                      style={{
+                        padding: '12px 16px',
+                        display: 'flex',
+                        alignItems: 'center',
+                        gap: '8px',
+                        color: '#ef4444',
+                        cursor: 'pointer',
+                        transition: 'background-color 0.2s',
+                        ':hover': {
+                          backgroundColor: '#f3f4f6'
+                        }
+                      }}
+                      onClick={handleLogout}
+                    >
+                      <LogOut size={16} />
+                      <span>Logout</span>
+                    </div>
+                  </div>
+                </div>
+              )}
             </div>
           </div>
         </div>
@@ -220,7 +311,8 @@ const ERPDashboard = () => {
               <div style={{
                 display: 'flex',
                 justifyContent: 'flex-end',
-                marginBottom: '24px'
+                marginBottom: '24px',
+                gap: '12px'
               }}>
                 <button 
                   onClick={handleAddEmployee}
@@ -252,6 +344,68 @@ const ERPDashboard = () => {
                 >
                   <Plus size={16} />
                   Add Employee
+                </button>
+                <button 
+                  onClick={() => {/* Handle employee group click */}}
+                  style={{
+                    backgroundColor: '#7E44EE',
+                    color: '#ffffff',
+                    border: 'none',
+                    borderRadius: '8px',
+                    padding: '12px 20px',
+                    fontSize: '14px',
+                    fontWeight: '600',
+                    cursor: 'pointer',
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: '8px',
+                    transition: 'all 0.2s ease',
+                    boxShadow: '0 2px 4px rgba(124, 58, 237, 0.2)'
+                  }}
+                  onMouseEnter={(e) => {
+                    e.target.style.backgroundColor = '#6d28d9';
+                    e.target.style.transform = 'translateY(-1px)';
+                    e.target.style.boxShadow = '0 4px 8px rgba(124, 58, 237, 0.3)';
+                  }}
+                  onMouseLeave={(e) => {
+                    e.target.style.backgroundColor = '#7E44EE';
+                    e.target.style.transform = 'translateY(0)';
+                    e.target.style.boxShadow = '0 2px 4px rgba(124, 58, 237, 0.2)';
+                  }}
+                >
+                  <Users size={16} />
+                  Employee Group
+                </button>
+                <button 
+                  onClick={() => {/* Handle map items click */}}
+                  style={{
+                    backgroundColor: '#7E44EE',
+                    color: '#ffffff',
+                    border: 'none',
+                    borderRadius: '8px',
+                    padding: '12px 20px',
+                    fontSize: '14px',
+                    fontWeight: '600',
+                    cursor: 'pointer',
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: '8px',
+                    transition: 'all 0.2s ease',
+                    boxShadow: '0 2px 4px rgba(124, 58, 237, 0.2)'
+                  }}
+                  onMouseEnter={(e) => {
+                    e.target.style.backgroundColor = '#6d28d9';
+                    e.target.style.transform = 'translateY(-1px)';
+                    e.target.style.boxShadow = '0 4px 8px rgba(124, 58, 237, 0.3)';
+                  }}
+                  onMouseLeave={(e) => {
+                    e.target.style.backgroundColor = '#7E44EE';
+                    e.target.style.transform = 'translateY(0)';
+                    e.target.style.boxShadow = '0 2px 4px rgba(124, 58, 237, 0.2)';
+                  }}
+                >
+                  <Map size={16} />
+                  Map Items
                 </button>
               </div>
 

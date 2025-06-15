@@ -188,8 +188,7 @@ const styles = {
     margin: '0 auto',
     backgroundColor: '#ffffff',
     padding: '40px 60px',
-    borderRadius: '8px',
-    boxShadow: '0 2px 10px rgba(0, 0, 0, 0.1)'
+    borderRadius: '8px'
   },
   form: {
     display: 'flex',

@@ -220,7 +220,7 @@ const styles = {
     backgroundColor: '#7E44EE',
     border: '2px solid #7E44EE',
     borderRadius: '12px',
-    padding: '24px',
+    padding: '18px',
     textAlign: 'center',
     transition: 'all 0.3s ease',
     cursor: 'pointer',
@@ -235,7 +235,7 @@ const styles = {
     margin: '0 0 16px 0'
   },
   statCount: {
-    fontSize: '36px',
+    fontSize: '26px',
     fontWeight: '700',
     color: 'white',
     margin: '0'
